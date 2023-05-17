@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
-import {getSortedPostsData} from '../lib/posts'
+import { getSortedPostsData } from '../lib/posts'
 
-export default function Home({pageProps}) {
+export default function Home({ pageProps }) {
   return (
     <Layout home>
       <Head>
@@ -16,32 +16,29 @@ export default function Home({pageProps}) {
           <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
         </p>
       </section>
-        <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-            <h2 className={utilStyles.headingLg}>Blog</h2>
-            <ul className={utilStyles.list}>
-                {pageProps.allPostsData.map(({ id, date, title }) => (
-                    <li className={utilStyles.listItem} key={id}>
-                        {title}
-                        <br />
-                        {id}
-                        <br />
-                        {date}
-                    </li>
-                ))}
-            </ul>
-        </section>
+      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+        <h2 className={utilStyles.headingLg}>Blog</h2>
+        <ul className={utilStyles.list}>
+          {pageProps.allPostsData.map(({ id, date, title }) => (
+            <li className={utilStyles.listItem} key={id}>
+              {title}
+              <br />
+              {id}
+              <br />
+              {date}
+            </li>
+          ))}
+        </ul>
+      </section>
     </Layout>
   )
 }
 
 export async function getStaticProps() {
-    console.log('calling');
-    const allPostsData = getSortedPostsData();
-    console.log(allPostsData);
-    console.log('next');
-    return {
-        props: {
-            allPostsData,
-        }
-    };
+  const allPostsData = getSortedPostsData();
+  return {
+    props: {
+      allPostsData,
+    }
+  };
 }
